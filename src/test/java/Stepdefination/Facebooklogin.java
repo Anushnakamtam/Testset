@@ -7,21 +7,36 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pageobjects.fbloginpages;
 
-public class Facebooklogin {
+public class Facebooklogin extends HooksClass {
 	public static WebDriver driver;
 	fbloginpages obj;
+	
+	@Before()
+	public void BrowserLaunch() {
+		WebDriverManager.chromedriver().setup();
+		driver=new ChromeDriver();
+		
+	}
+	
+	@After()
+	public void BrowserClose() {
+		driver.close();
+	}
 	
 	
 	
 	@Given("Testlaunch the browser")
 	public void testlaunch_the_browser() {
-		
-		WebDriverManager.chromedriver().setup();
-		 driver=new ChromeDriver();
+	
+				
+//		WebDriverManager.chromedriver().setup();
+//		 driver=new ChromeDriver();
 		driver.get("https://www.facebook.com/");
 	}
 	
@@ -40,7 +55,7 @@ public class Facebooklogin {
 	 
 		obj.getLogin().click();
 		Thread.sleep(1500);
-		driver.close();
+		
 		
 	}
 
